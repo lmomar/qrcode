@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>You are about to delete the document : # {{ document.id }}</h2>
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_widget(form.confirm) }}
+        <a href="{{ path('document_list') }}" class="btn btn-info">Cancel</a>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

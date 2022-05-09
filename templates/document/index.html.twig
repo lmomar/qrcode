@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %} Document list {% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="well">
+            <a href="{{ path('document_add') }}" class="btn btn-primary btn-sm float-end">
+                <i class="fa-solid fa-plus"></i>
+                New Document
+            </a>
+        </div>
+        <table class="table table-responsive table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Created At</th>
+                <th><i class="fa-solid fa-qrcode fa-sm"></i> QR</th>
+                <th><i class="fa-solid fa-download fa-sm"></i> PDF</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for doc in documents %}
+                <tr>
+                    <td>{{ doc.id }}</td>
+                    <td>{{ doc.title }}</td>
+                    <td>{{ doc.category }}</td>
+                    <td>{{ doc.createdAt|date('d-m-Y h:m') }}</td>
+                    <td>
+                        <a href="{{ path('document_qrcode', {id: doc.id}) }}" class="btn btn-success btn-sm" title="Download Qr">
+                            <i class="fa-solid fa-qrcode fa-sm"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ path('document_pdf', {id: doc.id}) }}" class="btn btn-success btn-sm" title="Download PDF">
+                            <i class="fa-solid fa-file-pdf fa-sm"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ path('document_edit', {'id': doc.id}) }}" class="btn btn-warning btn-sm">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+
+                        <a href="{{ path('document_remove', {'id': doc.id}) }}" class="btn btn-danger btn-sm">
+                            <i class="fa-solid fa-remove"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

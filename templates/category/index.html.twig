@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategoryController!{% endblock %}
+
+{% block page_title %} Categories list {% endblock %}
+{% block body %}
+<div class="row">
+    <div class="well">
+        <a href="{{ path('category_add') }}" class="btn btn-primary btn-sm float-end">
+            <i class="fa-solid fa-plus"></i>
+            New category
+        </a>
+    </div>
+    <table class="table table-responsive table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>CreatedAt</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cat in categories %}
+            <tr>
+                <td>{{ cat.id }}</td>
+                <td>{{ cat.title }}</td>
+                <td>{{ cat.createdAt|date('d-m-Y h:m') }}</td>
+                <td>
+                    <a href="{{ path('category_edit', {'id': cat.id}) }}" class="btn btn-warning btn-sm">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+
+                    <a href="{{ path('category_remove', {'id': cat.id}) }}" class="btn btn-danger btn-sm">
+                        <i class="fa-solid fa-remove"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
